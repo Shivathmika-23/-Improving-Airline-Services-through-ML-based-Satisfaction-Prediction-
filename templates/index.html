@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Airline Satisfaction Predictor</title>
+    <script>
+        function fillSuggested() {
+            const suggest = {{ suggest | tojson }};
+            if (suggest) {
+                for (const key in suggest) {
+                    if (document.getElementsByName(key)[0]) {
+                        document.getElementsByName(key)[0].value = suggest[key];
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body onload="fillSuggested()">
+    <h2>Passenger Satisfaction Prediction</h2>
+    <form method="POST">
+        Gender:
+        <select name="Gender"><option>Male</option><option>Female</option></select><br><br>
+        Age: <input type="number" name="Age"><br><br>
+        Customer Type:
+        <select name="Customer Type"><option>First-time</option><option>Returning</option></select><br><br>
+        Type of Travel:
+        <select name="Type of Travel"><option>Business</option><option>Personal</option></select><br><br>
+        Class:
+        <select name="Class"><option>Eco</option><option>Eco Plus</option><option>Business</option></select><br><br>
+
+        Flight Distance: <input type="number" name="Flight Distance"><br><br>
+        Departure Delay: <input type="number" name="Departure Delay"><br><br>
+        Arrival Delay: <input type="number" name="Arrival Delay"><br><br>
+        Departure and Arrival Time Convenience: <input type="number" name="Departure and Arrival Time Convenience"><br><br>
+        On-board Service: <input type="number" name="On-board Service"><br><br>
+        Seat Comfort: <input type="number" name="Seat Comfort"><br><br>
+        Leg Room Service: <input type="number" name="Leg Room Service"><br><br>
+        Cleanliness: <input type="number" name="Cleanliness"><br><br>
+        Food and Drink: <input type="number" name="Food and Drink"><br><br>
+        In-flight Service: <input type="number" name="In-flight Service"><br><br>
+        In-flight Wifi Service: <input type="number" name="In-flight Wifi Service"><br><br>
+        In-flight Entertainment: <input type="number" name="In-flight Entertainment"><br><br>
+        Baggage Handling: <input type="number" name="Baggage Handling"><br><br>
+        Check-in Service: <input type="number" name="Check-in Service"><br><br>
+        Ease of Online Booking: <input type="number" name="Ease of Online Booking"><br><br>
+        Gate Location: <input type="number" name="Gate Location"><br><br>
+        Online Boarding: <input type="number" name="Online Boarding"><br><br>
+
+        <input type="submit" name="predict" value="Predict">
+        <input type="submit" name="suggest" value="Suggest Data">
+    </form>
+
+    {% if result %}
+        <h3>Prediction: {{ result }}</h3>
+    {% endif %}
+</body>
+</html>
